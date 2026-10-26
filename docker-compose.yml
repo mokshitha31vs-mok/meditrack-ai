@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - SECRET_KEY=meditrack-ai-secret-key-2026-super-secure
+      - JWT_SECRET_KEY=meditrack-jwt-secret-key-2026-secure
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/meditrack.db:/app/meditrack.db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
